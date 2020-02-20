@@ -1,0 +1,27 @@
+﻿<!--
+    Copyright 2020 Pietro Vitelli
+    
+    This file is part of OriFlagTess program.
+
+    OriFlagTess is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    OriFlagTess is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OriFlagTess.  If not, see<http://www.gnu.org/licenses/> -->
+    
+<Application x:Class="Flagstone_Tessellation___Molecule_construction.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Flagstone_Tessellation___Molecule_construction"
+             StartupUri="Main.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
