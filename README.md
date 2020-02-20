@@ -1,3 +1,3 @@
-# OriFlagTess: Origami Flagstone tessellation molecule design tool
+## OriFlagTess
 
-OriFlagTess is a design software dedicated to construct single flagstone molecules.  
+OriFlagTess is a design software dedicated to calculate and construct single flagstone molecules.  
