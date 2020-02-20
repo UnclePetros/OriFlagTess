@@ -25,6 +25,9 @@ Use angles controls to change angles values of the molecule:
 Use sides controls to change sides dimensions of the molecule:  
 - it is possible to set only the first n-2 side of the n-pleat molecule; the last 2 sides are automatically calculated.  
 
+Use pleatCenters controls to change the center of the pleats of the molecule.  
+
+
 ## For developers
 
 If you want to make changes or modify the program, simply:
