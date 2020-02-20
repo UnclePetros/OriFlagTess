@@ -1,3 +1,5 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 # OriFlagTess - An origami flagstone molecule design tool
 
 OriFlagTess is an origami design software dedicated to calculate and construct single flagstone molecules.  
