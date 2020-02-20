@@ -12,7 +12,7 @@ If not, you can download it from here: [https://dotnet.microsoft.com/download/do
 
 ## Installation
 
-Download this latest version (alpha version): [https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.2-alpha](https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.2-alpha) 
+Download this latest version (alpha version): [https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.2-alpha](https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.2-alpha)  
 Unzip the package and launch _OriFlagTess.exe_ file executable. 
 
 ## Use
