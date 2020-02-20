@@ -20,7 +20,7 @@ Unzip the package and launch _OriFlagTess.exe_ file executable.
 The software starts with a 4-pleat molecule construction.  
 Use the molecule type combobox to choose a different molecule type.  
 Use angles controls to change angles values of the molecule:  
-- it is possible to set only the first n-1 angles of the n-pleat molecule; the last one is automatically calculated.
+- it is possible to set only the first n-1 angles of the n-pleat molecule; the last one is automatically calculated.  
 Use sides controls to change sides dimensions of the molecule:  
 - it is possible to set only the first n-2 side of the n-pleat molecule; the last 2 sides are automatically calculated.  
 
