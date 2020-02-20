@@ -131,9 +131,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Name="Options" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click">
+                <Button x:Name="Options" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click" IsEnabled="False">
                     <StackPanel Margin="10,10,10,10">
-                        <Image Source="images/undo.png" />
+                        <Image Source="images/settings.png" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="Reset" Grid.Column="1" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click">
