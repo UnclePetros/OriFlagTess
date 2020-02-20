@@ -1,8 +1,8 @@
-## OriFlagTess - An origami flagstone molecule design tool
+# OriFlagTess - An origami flagstone molecule design tool
 
 OriFlagTess is an origami design software dedicated to calculate and construct single flagstone molecules.  
 
-# Prerequisites
+## Prerequisites
 
 In order to run the software .NET Framework 4.72 is required.  
 Latest version of Windows OS have it already available.  
