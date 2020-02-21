@@ -4,6 +4,10 @@
 
 OriFlagTess is an origami design software dedicated to calculate and construct single flagstone molecules.  
 
+## Main features
+- Real-time simulation of the crease pattern of a specific "flagstone" molecule
+- Possibility to save a molecule crease pattern in svg format.
+
 ## Prerequisites
 
 In order to run the software .NET Framework 4.72 is required.  
@@ -18,7 +22,7 @@ Unzip the package and launch _OriFlagTess.exe_ file executable.
 ## Use
 
 The software starts with a 4-pleat molecule construction.  
-Use the molecule type combobox to choose a different molecule type.  
+Use the molecule type combobox to choose a different molecule type (from 3-pleat to 10-pleat).  
 Use angles controls to change angles values of the molecule:  
 - it is possible to set only the first n-1 angles of the n-pleat molecule; the last one is automatically calculated.  
 
@@ -27,6 +31,12 @@ Use sides controls to change sides dimensions of the molecule:
 
 Use pleatCenters controls to change the center of the pleats of the molecule.  
 Use center controls to change the position of the center of the molecule.  
+
+## Next features
+- Possibility to control the spacing between tiles
+
+## Next challenge
+- Convert software in a javascrit online version, using [Rabbit Ear](https://github.com/robbykraft/Origami/) library.
 
 ## For developers
 
