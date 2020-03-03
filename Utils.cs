@@ -207,11 +207,11 @@ namespace Flagstone_Tessellation___Molecule_construction
             }
 
             rotAngle -= angles[angles.Count - 2];
-            sides[angles.Count - 2] = ( - V.Y - V.X * Utils.Tan(angles[0]) ) / (Utils.Cos(rotAngle) * Utils.Tan(angles[0]) - Utils.Sin(rotAngle) );
+            sides[angles.Count - 2] = Math.Round(( - V.Y - V.X * Utils.Tan(angles[0]) ) / (Utils.Cos(rotAngle) * Utils.Tan(angles[0]) - Utils.Sin(rotAngle) ), 3);
             if(Utils.Cos(angles[0]) == 0)
-                sides[angles.Count - 1] = Math.Round((-sides[angles.Count - 2] * Utils.Sin(rotAngle) + V.Y) / (Utils.Sin(angles[0])),5);
+                sides[angles.Count - 1] = Math.Round((-sides[angles.Count - 2] * Utils.Sin(rotAngle) + V.Y) / (Utils.Sin(angles[0])),3);
             else
-                sides[angles.Count - 1] = Math.Round((sides[angles.Count - 2] * Utils.Cos(rotAngle) + V.X) / (-Utils.Cos(angles[0])),5);
+                sides[angles.Count - 1] = Math.Round((sides[angles.Count - 2] * Utils.Cos(rotAngle) + V.X) / (-Utils.Cos(angles[0])),3);
 
             return sides;
         }

@@ -33,11 +33,19 @@ namespace Flagstone_Tessellation___Molecule_construction
         List<double> sides;
         List<double> angles;
         List<double> foldCenters;
+        double spacing;
         List< Dictionary<string, Point> > pleats;
 
         public Molecule()
         {
+            this.spacing = 0.0D;
+            this.pleats = new List<Dictionary<string, Point>>();
 
+            //Init pleats list
+            for (int i = 0; i < numPleats; i++)
+            {
+                pleats.Add(new Dictionary<string, Point>());
+            }
         }
 
         /// <summary>
@@ -57,6 +65,7 @@ namespace Flagstone_Tessellation___Molecule_construction
         /// <param name="center">Is the center O of the molecule expressed as a point in a cartesian system with origin in A(0,0)</param>
         public Molecule(Point center, int numPleats)
         {
+            this.spacing = 0.0D;
             this.center = center;
             this.numPleats = numPleats;
 
@@ -95,12 +104,13 @@ namespace Flagstone_Tessellation___Molecule_construction
             Point P = getRecursiveCenter(numPleat);
             double l = this.sides[numPleat];
             double c = this.foldCenters[numPleat];
+            double s = this.spacing;
 
             Point V1 = new Point( 0, 0 );
-            Point V2 = new Point( l, V1.Y );
-            Point L = new Point( l/2, (Math.Pow(P.X,2)-P.X*l+Math.Pow(P.Y,2))/(2*P.Y));
-            Point M = new Point( c/2, (Math.Pow(P.X, 2) - P.X * l) / (2 * P.Y) + ((l-P.X)/2)*(P.X-c)/P.Y);
-            Point N = new Point( (c+l)/2, (Math.Pow(P.X, 2) - P.X * l) / (2 * P.Y) - (P.X/2)*((P.X -c)/P.Y));
+            Point V2 = new Point( Math.Round(l,5), Math.Round(V1.Y,5) );
+            Point L = new Point( Math.Round(l/2,5), Math.Round((Math.Pow(P.X,2)-P.X*l+Math.Pow(P.Y,2))/(2*P.Y),5) );
+            Point M = new Point( Math.Round((c-s/2)/2,5), Math.Round((Math.Pow(P.X, 2) - P.X * l) / (2 * P.Y) + ((l-P.X)/2)*(P.X-(c-s/2))/P.Y,5) );
+            Point N = new Point(Math.Round((c+s/2+l)/2,5), Math.Round((Math.Pow(P.X, 2) - P.X * l) / (2 * P.Y) - (P.X/2)*((P.X -(c+s/2))/P.Y),5) );
             Point Q = new Point(); //TODO
             Point R = new Point(); //TODO
 
@@ -135,8 +145,8 @@ namespace Flagstone_Tessellation___Molecule_construction
             else
             {
                 prevC = getRecursiveCenter(n - 1);
-                C.X = (this.sides[n - 1] - prevC.X) * Math.Round(Math.Cos(Math.PI - this.angles[n]),5) + prevC.Y * Math.Round(Math.Sin(Math.PI - this.angles[n]),5);
-                C.Y = (this.sides[n - 1] - prevC.X) * Math.Round(Math.Sin(Math.PI - this.angles[n]),5) - prevC.Y * Math.Round(Math.Cos(Math.PI - this.angles[n]),5);
+                C.X = Math.Round((this.sides[n - 1] - prevC.X) * Math.Round(Math.Cos(Math.PI - this.angles[n]),5) + prevC.Y * Math.Round(Math.Sin(Math.PI - this.angles[n]),5),5);
+                C.Y = Math.Round((this.sides[n - 1] - prevC.X) * Math.Round(Math.Sin(Math.PI - this.angles[n]),5) - prevC.Y * Math.Round(Math.Cos(Math.PI - this.angles[n]),5),5);
             }
 
             return C;
@@ -177,6 +187,11 @@ namespace Flagstone_Tessellation___Molecule_construction
         public void setFoldCenters(List<double> foldCenters)
         {
             this.foldCenters = foldCenters;
+        }
+
+        public void setSpacing(double spacing)
+        {
+            this.spacing = spacing;
         }
 
         public Point getCenter()

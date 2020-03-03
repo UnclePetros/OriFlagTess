@@ -50,6 +50,7 @@ namespace Flagstone_Tessellation___Molecule_construction
         List<double> sides;
         List<double> pleatCenters;
         List<double> angles;
+        List<Dictionary<string, Point>> pleatsRotTras;
         public Main()
         {
             NameScope.SetNameScope(this, new NameScope());
@@ -181,7 +182,8 @@ namespace Flagstone_Tessellation___Molecule_construction
             }
             this.pleatCenterManualCheckBox.IsChecked = true;
             //Assign default center with polygon apotema
-            this.centerY.Value = (decimal)Math.Round((50 / (2 * Utils.Tan(Math.PI / numPleats))),1);
+            this.centerX.Value = (decimal)50/2;
+            this.centerY.Value = (decimal)Math.Round((50 / (2 * Utils.Tan(Math.PI / numPleats))),3);
 
             renderInputNode();
             renderCreasePattern();
@@ -274,13 +276,14 @@ namespace Flagstone_Tessellation___Molecule_construction
             mol.setAngles(angles);
             mol.setSides(sides);
             mol.setFoldCenters(pleatCenters);
+            mol.setSpacing((double)this.spacing.Value);
             mol.calculatePleats();
 
             Point canvasCenter = new Point(this.creasePatternCanvas.Width / 2, this.creasePatternCanvas.Height / 2); //Center of the crease pattern canvas panel
             Point trs = new Point(canvasCenter.X - mol.getCenter().X, canvasCenter.Y + mol.getCenter().Y);
             this.creasePatternCanvas.Children.Add(Utils.ellipse(4, 4, mol.getCenter().X + trs.X - 2, -mol.getCenter().Y + trs.Y - 2, Brushes.Brown));
 
-            List<Dictionary<string, Point>> pleats, pleatsRotTras;
+            List<Dictionary<string, Point>> pleats;//, pleatsRotTras;
             pleats = mol.getPleats();
             pleatsRotTras = new List<Dictionary<string, Point>>();
 
@@ -731,6 +734,29 @@ namespace Flagstone_Tessellation___Molecule_construction
             this.numPleats = ((ComboBox)sender).SelectedIndex + 3;
             //System.Windows.MessageBox.Show(""+e.AddedItems[0]);
             InitUI(this.numPleats);
+        }
+
+        private void autoCenter_Click(object sender, RoutedEventArgs e)
+        {
+            double x = 0.0D, y = 0.0D;
+            //calculate centroid
+            for (int i = 0; i < this.numPleats; i++)
+            {
+                x += pleatsRotTras[i]["V2"].X;
+                y += pleatsRotTras[i]["V2"].Y;
+            }
+            this.centerX.Value = (decimal)Math.Round((x / this.numPleats),3);
+            this.centerY.Value = (decimal)Math.Round((y / this.numPleats),3);
+        }
+
+        private void spacing_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (e.NewValue != null)
+            {
+                renderCreasePattern();
+            }
+            else
+                ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
         }
     }
 }
