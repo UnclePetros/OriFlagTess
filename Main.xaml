@@ -150,42 +150,33 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Name="Options" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click" IsEnabled="False">
-                    <StackPanel Margin="10,10,10,10">
-                        <Image Source="images/settings.png" />
-                    </StackPanel>
-                </Button>
-                <Button x:Name="Reset" Grid.Column="1" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click">
+                <Button x:Name="Reset" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/undo.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="ZoomIn" Grid.Column="2" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomIn_Click">
+                <Button x:Name="ZoomIn" Grid.Column="1" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomIn_Click">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/zoom_in.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="ZoomOut" Grid.Column="3" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomOut_Click">
+                <Button x:Name="ZoomOut" Grid.Column="2" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomOut_Click">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/zoom_out.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="Save" Grid.Column="4" Width="48" Height="48" HorizontalAlignment="Center" Click="Save_Click">
+                <Button x:Name="Save" Grid.Column="3" Width="48" Height="48" HorizontalAlignment="Center" Click="Save_Click">
                     <StackPanel Margin="5,5,5,5">
                         <Image Source="images/save.png" />
                     </StackPanel>
                 </Button>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Header="Current options" Margin="10,0,0,0">
-            <TextBlock x:Name="optionsText" Margin="5,5,5,5" HorizontalAlignment="Left" />
-        </GroupBox>
-        <GroupBox Grid.Row="2" Grid.RowSpan="5" Grid.Column="3" Header="Log" Margin="10,0,0,0">
+        <GroupBox Grid.Row="0" Grid.RowSpan="7" Grid.Column="3" Header="Log" Margin="10,0,0,0">
             <ScrollViewer Background="#eee">
                 <TextBlock x:Name="Log" Margin="5,5,5,5" HorizontalAlignment="Left"/>
             </ScrollViewer>

@@ -46,6 +46,7 @@ namespace Flagstone_Tessellation___Molecule_construction
     {
         string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
         int MAX_PLEAT = int.Parse(System.Configuration.ConfigurationManager.AppSettings["maxPleat"]);
+        string UOM = System.Configuration.ConfigurationManager.AppSettings["uom"];
         int numPleats = 4; 
         List<double> sides;
         List<double> pleatCenters;
