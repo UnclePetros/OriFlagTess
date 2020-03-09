@@ -11,7 +11,7 @@ It is based on mathematical concepts explained in the article ["Origami - Molecu
 
 ## Prerequisites
 
-In order to run the software .NET Framework 4.72 is required.  
+In order to run the software .NET Framework 4.72 or higher is required.  
 Latest version of Windows OS have it already available.  
 If not, you can download it from here: [https://dotnet.microsoft.com/download/dotnet-framework/net472](https://dotnet.microsoft.com/download/dotnet-framework/net472)  
 
