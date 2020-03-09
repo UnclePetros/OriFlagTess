@@ -23,6 +23,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib"  x:Class="Flagstone_Tessellation___Molecule_construction.Main"
         mc:Ignorable="d"
+        x:Name="mainWindow"
         Title="OriFlagTess :: Molecule construction" ResizeMode="NoResize" SizeToContent="WidthAndHeight" 
         WindowStartupLocation="CenterScreen">
     <Grid x:Name="mainGrid" Margin="30">

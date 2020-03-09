@@ -50,8 +50,16 @@ namespace Flagstone_Tessellation___Molecule_construction
         public Main()
         {
             NameScope.SetNameScope(this, new NameScope());
+            
             InitializeComponent();
             InitUI(4); //Initialize UI with a 4-pleat molecule
+
+            int vMajor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+            int vMinor = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
+            //DateTime buildDate = new DateTime(2000, 1, 1)
+            //                        .AddDays(version.Build).AddSeconds(version.Revision * 2);
+            string displayableVersion = $"{vMajor}.{vMinor}";
+            this.mainWindow.Title += " :: v"+displayableVersion;
 
             //Node View initialization
             this.inputNodeCanvas.ClipToBounds = true;
