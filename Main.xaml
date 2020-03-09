@@ -110,9 +110,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Name="autoCenter" Grid.Row="0" Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Center" Click="autoCenter_Click">
+                <Button x:Name="autoCenter" Grid.Row="0" Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Center" Click="autoCenter_Click"  ToolTip="Auto center">
                     <StackPanel Margin="10,10,10,10">
-                        <Image Source="images/center.png" />
+                        <Image Source="images/center.png"/>
                     </StackPanel>
                 </Button>
                 <Label Content="CenterX" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
@@ -154,22 +154,22 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Name="Reset" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click">
+                <Button x:Name="Reset" Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" Click="Reset_Click"  ToolTip="Reset values">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/undo.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="ZoomIn" Grid.Column="1" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomIn_Click">
+                <Button x:Name="ZoomIn" Grid.Column="1" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomIn_Click"  ToolTip="Zoom in crease pattern">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/zoom_in.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="ZoomOut" Grid.Column="2" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomOut_Click">
+                <Button x:Name="ZoomOut" Grid.Column="2" Width="48" Height="48" HorizontalAlignment="Center" Click="ZoomOut_Click"  ToolTip="Zoom out crease pattern">
                     <StackPanel Margin="10,10,10,10">
                         <Image Source="images/zoom_out.png" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="Save" Grid.Column="3" Width="48" Height="48" HorizontalAlignment="Center" Click="Save_Click">
+                <Button x:Name="Save" Grid.Column="3" Width="48" Height="48" HorizontalAlignment="Center" Click="Save_Click"  ToolTip="Save crease pattern">
                     <StackPanel Margin="5,5,5,5">
                         <Image Source="images/save.png" />
                     </StackPanel>
