@@ -34,6 +34,8 @@ Use sides controls to change sides dimensions of the molecule:
 Use pleatCenters controls to change the center of the pleats of the molecule.  
 Use center controls to change the position of the center of the molecule.  
 
+Further info on its usage are available in [this article](https://pvitelli.net/2020/03/09/origami-software-molecole-flagstone/).
+
 ## Next challenge
 - Convert software in a javascrit online version, using [Rabbit Ear](https://github.com/robbykraft/Origami/) library.
 
