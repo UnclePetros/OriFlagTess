@@ -18,7 +18,7 @@ If not, you can download it from here: [https://dotnet.microsoft.com/download/do
 
 ## Installation
 
-Download the latest version (current is v0.3): [https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.3](https://github.com/UnclePetros/OriFlagTess/releases/tag/v0.3)  
+Download the latest version (current is v0.3): [https://github.com/UnclePetros/OriFlagTess/releases/download/v0.3/OriFlagTess.v0.3.zip](https://github.com/UnclePetros/OriFlagTess/releases/download/v0.3/OriFlagTess.v0.3.zip)  
 Unzip the package and launch _OriFlagTess.exe_ file executable. 
 
 ## Use
