@@ -51,13 +51,16 @@ namespace Flagstone_Tessellation___Molecule_construction
             return RadToDeg(Math.Atan2(value1, value2));
         }
 
-        public static Line line(double x1, double y1, double x2, double y2, Brush brush)
+        public static Line line(double x1, double y1, double x2, double y2, Brush brush, int lineStyle = 0)
         {
             Line line = new Line();
             line.X1 = x1;
             line.X2 = x2;
             line.Y1 = y1;
             line.Y2 = y2;
+
+            if(lineStyle != 0)
+                line.StrokeDashArray = toDashArrayPattern(lineStyle);
 
             line.StrokeThickness = 1;
             line.Stroke = brush;
@@ -66,8 +69,28 @@ namespace Flagstone_Tessellation___Molecule_construction
 
             return line;
         }
+        public static DoubleCollection toDashArrayPattern(int lineStyle)
+        {
+            DoubleCollection pattern = new DoubleCollection();
+            switch (lineStyle)
+            {
+                case 1:
+                    pattern.Add(8); pattern.Add(2); pattern.Add(1); pattern.Add(2);
+                    break;
+                case 2:
+                    pattern.Add(8); pattern.Add(3);
+                    break;
+                case 3:
+                    pattern.Add(4); pattern.Add(2);
+                    break;
+                default:
+                    break;
+            }
 
-        public static Line lineDash(double x1, double y1, double x2, double y2, Brush brush)
+            return pattern;
+        }
+
+            public static Line lineDash(double x1, double y1, double x2, double y2, Brush brush)
         {
             Line line = new Line();
             line.X1 = x1;

@@ -1,0 +1,40 @@
+﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  x:Class="Flagstone_Tessellation___Molecule_construction.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flagstone_Tessellation___Molecule_construction"
+        mc:Ignorable="d"
+        Title="OriFlagTess :: Settings" ResizeMode="NoResize" SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterScreen">
+    <Grid x:Name="settingsGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Settings"  Grid.Row="0" Grid.Column="0" Margin="10,10,10,0" Padding="10,10,10,10">
+            <Grid x:Name="parametersGrid" Margin="10,10,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Label Content="MountainFold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ComboBox x:Name="mountainFoldComboBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="30" Width="200" FontWeight="Bold" FontSize="16" SelectionChanged="mountainFoldComboBox_SelectionChanged"/>
+                <Label Content="ValleyFold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ComboBox x:Name="valleyFoldComboBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="30" Width="200" FontWeight="Bold" FontSize="16" SelectionChanged="valleyFoldComboBox_SelectionChanged"/>
+                <xctk:ColorPicker x:Name="mountainFoldColorPicker" Grid.Row="0" Grid.Column="2" Height="30" Margin="10,0,0,0" SelectedColorChanged="mountainFoldColorPicker_SelectedColorChanged"/>
+                <xctk:ColorPicker x:Name="valleyFoldColorPicker" Grid.Row="1" Grid.Column="2" Height="30" Margin="10,0,0,0" SelectedColorChanged="valleyFoldColorPicker_SelectedColorChanged"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="OK" Grid.Row="2" Grid.ColumnSpan="2" Width="75" Height="40" Content="OK" HorizontalAlignment="Center" ToolTip="Close settings" Click="OK_Click"/>
+    </Grid>
+</Window>

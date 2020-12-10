@@ -151,6 +151,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -173,6 +174,11 @@
                 <Button x:Name="Save" Grid.Column="3" Width="48" Height="48" HorizontalAlignment="Center" Click="Save_Click"  ToolTip="Save crease pattern">
                     <StackPanel Margin="5,5,5,5">
                         <Image Source="images/save.png" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Settings" Grid.Column="4" Width="48" Height="48" HorizontalAlignment="Center"  ToolTip="Settings" Click="Settings_Click">
+                    <StackPanel Margin="5,5,5,5">
+                        <Image Source="images/settings.png" />
                     </StackPanel>
                 </Button>
             </Grid>

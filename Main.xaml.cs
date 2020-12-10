@@ -208,12 +208,19 @@ namespace Flagstone_Tessellation___Molecule_construction
 
         private List<Dictionary<string, Point>> renderInputNode()
         {
+            int MOUNTAIN_FOLD = int.Parse(System.Configuration.ConfigurationManager.AppSettings["mountainFold"]);
+            int VALLEY_FOLD = int.Parse(System.Configuration.ConfigurationManager.AppSettings["valleyFold"]);
+            var MOUNTAIN_FOLD_HTML_COLOR = System.Configuration.ConfigurationManager.AppSettings["mountainFoldColor"];
+            var mountainFoldColor = ((SolidColorBrush)new BrushConverter().ConvertFromString(MOUNTAIN_FOLD_HTML_COLOR));
+            var VALLEY_FOLD_HTML_COLOR = System.Configuration.ConfigurationManager.AppSettings["valleyFoldColor"];
+            var valleyFoldColor = ((SolidColorBrush)new BrushConverter().ConvertFromString(VALLEY_FOLD_HTML_COLOR));
+
             this.inputNodeCanvas.Children.Clear();
             Point canvasCenter = new Point(this.inputNodeCanvas.Width / 2, this.inputNodeCanvas.Height / 2);  //Center of the node canvas panel
             Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
             Point trs = new Point(canvasCenter.X - inputCenter.X, canvasCenter.Y + inputCenter.Y); //Translation needed to move the node figure to the center of the node canvas panel
 
-            this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, inputCenter.X + trs.X - 2, -inputCenter.Y + trs.Y - 2, Brushes.Brown));
+            this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, inputCenter.X + trs.X - 2, -inputCenter.Y + trs.Y - 2, mountainFoldColor));
 
             List<Dictionary<string, Point>> pleatsRotTras = new List<Dictionary<string, Point>>();
             Point traslation = new Point(0, 0);
@@ -251,10 +258,10 @@ namespace Flagstone_Tessellation___Molecule_construction
 
                 pleatsRotTras.Add(pleatRotTras);
 
-                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, Brushes.Brown));
-                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V1-END"].X + trs.X, -pleatRotTras["V1-END"].Y + trs.Y, Brushes.Brown));
-                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["V2-END"].X + trs.X, -pleatRotTras["V2-END"].Y + trs.Y, Brushes.Brown));
-                this.inputNodeCanvas.Children.Add(Utils.lineDash(pleatRotTras["C"].X + trs.X, -pleatRotTras["C"].Y + trs.Y, pleatRotTras["C-END"].X + trs.X, -pleatRotTras["C-END"].Y + trs.Y, Brushes.Brown));
+                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V1-END"].X + trs.X, -pleatRotTras["V1-END"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["V2-END"].X + trs.X, -pleatRotTras["V2-END"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.inputNodeCanvas.Children.Add(Utils.line(pleatRotTras["C"].X + trs.X, -pleatRotTras["C"].Y + trs.Y, pleatRotTras["C-END"].X + trs.X, -pleatRotTras["C-END"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
             }
 
             for (int i = 0; i < this.numPleats; i++)
@@ -274,6 +281,13 @@ namespace Flagstone_Tessellation___Molecule_construction
 
         public void renderCreasePattern()
         {
+            int MOUNTAIN_FOLD = int.Parse(System.Configuration.ConfigurationManager.AppSettings["mountainFold"]);
+            int VALLEY_FOLD = int.Parse(System.Configuration.ConfigurationManager.AppSettings["valleyFold"]);
+            var MOUNTAIN_FOLD_HTML_COLOR = System.Configuration.ConfigurationManager.AppSettings["mountainFoldColor"];
+            var mountainFoldColor = ((SolidColorBrush)new BrushConverter().ConvertFromString(MOUNTAIN_FOLD_HTML_COLOR));
+            var VALLEY_FOLD_HTML_COLOR = System.Configuration.ConfigurationManager.AppSettings["valleyFoldColor"];
+            var valleyFoldColor = ((SolidColorBrush)new BrushConverter().ConvertFromString(VALLEY_FOLD_HTML_COLOR));
+
             this.creasePatternCanvas.Children.Clear();
             Point moleculeCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value);
             Molecule mol = new Molecule(moleculeCenter, this.numPleats);
@@ -284,8 +298,9 @@ namespace Flagstone_Tessellation___Molecule_construction
             mol.calculatePleats();
 
             Point canvasCenter = new Point(this.creasePatternCanvas.Width / 2, this.creasePatternCanvas.Height / 2); //Center of the crease pattern canvas panel
+            Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
             Point trs = new Point(canvasCenter.X - mol.getCenter().X, canvasCenter.Y + mol.getCenter().Y);
-            this.creasePatternCanvas.Children.Add(Utils.ellipse(4, 4, mol.getCenter().X + trs.X - 2, -mol.getCenter().Y + trs.Y - 2, Brushes.Brown));
+            this.creasePatternCanvas.Children.Add(Utils.ellipse(4, 4, mol.getCenter().X + trs.X - 2, -mol.getCenter().Y + trs.Y - 2, mountainFoldColor));
 
             List<Dictionary<string, Point>> pleats;//, pleatsRotTras;
             pleats = mol.getPleats();
@@ -324,30 +339,36 @@ namespace Flagstone_Tessellation___Molecule_construction
                     pleatRotTras.Add(item.Key, Utils.RotTras(item.Value, angle, traslation));
 
                     if (item.Key == "V1" || item.Key == "V2" || item.Key == "M" || item.Key == "N")
-                        pleatRotTras.Add(item.Key + "-END", Utils.RotTras(new Point(item.Value.X, item.Value.Y - canvasCenter.Y), angle, traslation));
+                        pleatRotTras.Add(item.Key + "-END", Utils.RotTras(new Point(item.Value.X, - canvasCenter.Y + inputCenter.Y), angle, traslation));
                 }
 
                 pleatsRotTras.Add(pleatRotTras);
 
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V1-END"].X + trs.X, -pleatRotTras["V1-END"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, pleatRotTras["M-END"].X + trs.X, -pleatRotTras["M-END"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, pleatRotTras["N-END"].X + trs.X, -pleatRotTras["N-END"].Y + trs.Y, Brushes.Brown));
-                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["V2-END"].X + trs.X, -pleatRotTras["V2-END"].Y + trs.Y, Brushes.Brown));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V1"].X + trs.X, -pleatRotTras["V1"].Y + trs.Y, pleatRotTras["V1-END"].X + trs.X, -pleatRotTras["V1-END"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["M"].X + trs.X, -pleatRotTras["M"].Y + trs.Y, pleatRotTras["M-END"].X + trs.X, -pleatRotTras["M-END"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["N"].X + trs.X, -pleatRotTras["N"].Y + trs.Y, pleatRotTras["N-END"].X + trs.X, -pleatRotTras["N-END"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
+                this.creasePatternCanvas.Children.Add(Utils.line(pleatRotTras["V2"].X + trs.X, -pleatRotTras["V2"].Y + trs.Y, pleatRotTras["V2-END"].X + trs.X, -pleatRotTras["V2-END"].Y + trs.Y, mountainFoldColor, MOUNTAIN_FOLD));
 
                 if (i > 0)
                 {
-                    this.creasePatternCanvas.Children.Add(Utils.line(pleatsRotTras[i - 1]["L"].X + trs.X, -pleatsRotTras[i - 1]["L"].Y + trs.Y, pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, Brushes.Brown));
+                    this.creasePatternCanvas.Children.Add(Utils.line(pleatsRotTras[i - 1]["L"].X + trs.X, -pleatsRotTras[i - 1]["L"].Y + trs.Y, pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
                     if (i == mol.getNumPleats() - 1)
-                        this.creasePatternCanvas.Children.Add(Utils.line(pleatsRotTras[0]["L"].X + trs.X, -pleatsRotTras[0]["L"].Y + trs.Y, pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, Brushes.Brown));
+                        this.creasePatternCanvas.Children.Add(Utils.line(pleatsRotTras[0]["L"].X + trs.X, -pleatsRotTras[0]["L"].Y + trs.Y, pleatRotTras["L"].X + trs.X, -pleatRotTras["L"].Y + trs.Y, valleyFoldColor, VALLEY_FOLD));
                 }
             }
+
+            //Borders
+            this.creasePatternCanvas.Children.Add(Utils.line(0, 0, 1500, 0, mountainFoldColor, MOUNTAIN_FOLD));
+            this.creasePatternCanvas.Children.Add(Utils.line(1500, 0, 1500, 1500, mountainFoldColor, MOUNTAIN_FOLD));
+            this.creasePatternCanvas.Children.Add(Utils.line(0, 1500, 1500, 1500, mountainFoldColor, MOUNTAIN_FOLD));
+            this.creasePatternCanvas.Children.Add(Utils.line(0, 0, 0, 1500, mountainFoldColor, MOUNTAIN_FOLD));
         }
 
         private void renderAllCanvasWithAngleFocus(int inputIndex)
@@ -528,48 +549,54 @@ namespace Flagstone_Tessellation___Molecule_construction
 
         private void centerX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue != null)
-            {
-                List<Dictionary<string, Point>> pleatsRotTras;
-                pleatsRotTras = renderInputNode();
+            if (e.OldValue != null) 
+            { 
+                if (e.NewValue != null)
+                {
+                    List<Dictionary<string, Point>> pleatsRotTras;
+                    pleatsRotTras = renderInputNode();
 
-                //Highlight focused input on input node canvas
-                Point canvasCenter = new Point(this.inputNodeCanvas.Width / 2, this.inputNodeCanvas.Height / 2);  //Center of the node canvas panel
-                Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
-                Point trs = new Point(canvasCenter.X - inputCenter.X, canvasCenter.Y + inputCenter.Y); //Translation needed to move the node figure to the center of the node canvas panel
-                Line hl = Utils.line(pleatsRotTras[0]["V1"].X + trs.X, -pleatsRotTras[0]["V1"].Y - inputCenter.Y + trs.Y, inputCenter.X + trs.X, -pleatsRotTras[0]["V1"].Y - inputCenter.Y + trs.Y, Brushes.Red);
-                hl.StrokeThickness = 1.5d;
-                this.inputNodeCanvas.Children.Add(hl);
-                this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X1 - 2, hl.Y1 - 2, Brushes.Red));
-                this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X2 - 2, hl.Y2 - 2, Brushes.Red));
+                    //Highlight focused input on input node canvas
+                    Point canvasCenter = new Point(this.inputNodeCanvas.Width / 2, this.inputNodeCanvas.Height / 2);  //Center of the node canvas panel
+                    Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
+                    Point trs = new Point(canvasCenter.X - inputCenter.X, canvasCenter.Y + inputCenter.Y); //Translation needed to move the node figure to the center of the node canvas panel
+                    Line hl = Utils.line(pleatsRotTras[0]["V1"].X + trs.X, -pleatsRotTras[0]["V1"].Y - inputCenter.Y + trs.Y, inputCenter.X + trs.X, -pleatsRotTras[0]["V1"].Y - inputCenter.Y + trs.Y, Brushes.Red);
+                    hl.StrokeThickness = 1.5d;
+                    this.inputNodeCanvas.Children.Add(hl);
+                    this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X1 - 2, hl.Y1 - 2, Brushes.Red));
+                    this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X2 - 2, hl.Y2 - 2, Brushes.Red));
 
-                renderCreasePattern();
+                    renderCreasePattern();
+                }
+                else
+                    ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
             }
-            else
-                ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
         }
 
         private void centerY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue != null)
+            if (e.OldValue != null)
             {
-                List<Dictionary<string, Point>> pleatsRotTras;
-                pleatsRotTras = renderInputNode();
+                if (e.NewValue != null)
+                {
+                    List<Dictionary<string, Point>> pleatsRotTras;
+                    pleatsRotTras = renderInputNode();
 
-                //Highlight focused input on input node canvas
-                Point canvasCenter = new Point(this.inputNodeCanvas.Width / 2, this.inputNodeCanvas.Height / 2);  //Center of the node canvas panel
-                Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
-                Point trs = new Point(canvasCenter.X - inputCenter.X, canvasCenter.Y + inputCenter.Y); //Translation needed to move the node figure to the center of the node canvas panel
-                Line hl = Utils.line(pleatsRotTras[0]["V1"].X + inputCenter.X + trs.X, -pleatsRotTras[0]["V1"].Y + trs.Y, pleatsRotTras[0]["V1"].X + inputCenter.X + trs.X, -inputCenter.Y + trs.Y, Brushes.Red);
-                hl.StrokeThickness = 1.5d;
-                this.inputNodeCanvas.Children.Add(hl);
-                this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X1 - 2, hl.Y1 - 2, Brushes.Red));
-                this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X2 - 2, hl.Y2 - 2, Brushes.Red));
+                    //Highlight focused input on input node canvas
+                    Point canvasCenter = new Point(this.inputNodeCanvas.Width / 2, this.inputNodeCanvas.Height / 2);  //Center of the node canvas panel
+                    Point inputCenter = new Point((double)this.centerX.Value, (double)this.centerY.Value); //Center of the node
+                    Point trs = new Point(canvasCenter.X - inputCenter.X, canvasCenter.Y + inputCenter.Y); //Translation needed to move the node figure to the center of the node canvas panel
+                    Line hl = Utils.line(pleatsRotTras[0]["V1"].X + inputCenter.X + trs.X, -pleatsRotTras[0]["V1"].Y + trs.Y, pleatsRotTras[0]["V1"].X + inputCenter.X + trs.X, -inputCenter.Y + trs.Y, Brushes.Red);
+                    hl.StrokeThickness = 1.5d;
+                    this.inputNodeCanvas.Children.Add(hl);
+                    this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X1 - 2, hl.Y1 - 2, Brushes.Red));
+                    this.inputNodeCanvas.Children.Add(Utils.ellipse(4, 4, hl.X2 - 2, hl.Y2 - 2, Brushes.Red));
 
-                renderCreasePattern();
+                    renderCreasePattern();
+                }
+                else
+                    ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
             }
-            else
-                ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
         }
 
         private void creasePatternCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -623,12 +650,10 @@ namespace Flagstone_Tessellation___Molecule_construction
                 if (saveFileDialog.FilterIndex == 1)
                 {
                     var svg = new SvgDocument();
-                    svg.Width = 500;
-                    svg.Height = 500;
+                    svg.Width = 1500;
+                    svg.Height = 1500;
 
-                    var colorServer = new SvgColourServer(System.Drawing.Color.Black);
-
-                    var group = new SvgGroup { Fill = SvgPaintServer.None, Stroke = colorServer };
+                    var group = new SvgGroup { Fill = SvgPaintServer.None, Stroke = new SvgColourServer(System.Drawing.Color.Black) };
 
                     svg.Children.Add(group);
 
@@ -647,6 +672,15 @@ namespace Flagstone_Tessellation___Molecule_construction
                         var pathGeometry = PathGeometry.CreateFromGeometry((Geometry)geometry);
                         var s = XamlWriter.Save(pathGeometry);
 
+                        var scb = ((SolidColorBrush)(((Line)draw).Stroke)).Color;
+                        var color = System.Drawing.Color.FromArgb(scb.A,scb.R,scb.G,scb.B);
+                        var dashPatternSvg = new SvgUnitCollection();
+                        var dashPattern = ((Line)draw).StrokeDashArray;
+                        for (int i = 0; i < dashPattern.Count; i++)
+                        {
+                            dashPatternSvg.Add(new SvgUnit((float)dashPattern[i]));
+                        }
+
                         if (!String.IsNullOrEmpty(s))
                         {
                             var element = XElement.Parse(s);
@@ -659,7 +693,8 @@ namespace Flagstone_Tessellation___Molecule_construction
                                 {
                                     PathData = SvgPathBuilder.Parse(data),
                                     Fill = SvgPaintServer.None,
-                                    Stroke = colorServer
+                                    Stroke = new SvgColourServer(color),
+                                    StrokeDashArray = dashPatternSvg
                                 });
                             }
                         }
@@ -705,6 +740,14 @@ namespace Flagstone_Tessellation___Molecule_construction
                 }
             }
 
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog();
+            renderInputNode();
+            renderCreasePattern();
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
@@ -755,12 +798,14 @@ namespace Flagstone_Tessellation___Molecule_construction
 
         private void spacing_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue != null)
-            {
-                renderCreasePattern();
+            if(e.OldValue != null) { 
+                if (e.NewValue != null)
+                {
+                    renderCreasePattern();
+                }
+                else
+                    ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
             }
-            else
-                ((DecimalUpDown)sender).Value = (decimal)e.OldValue;
         }
     }
 }
