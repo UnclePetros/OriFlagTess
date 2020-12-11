@@ -37,7 +37,7 @@ Use center controls to change the position of the center of the molecule.
 Further info on its usage are available in the article "[Origami - A software tool for "Flagstone" molecule design](https://pvitelli.net/2020/03/09/origami-software-flagstone-molecule/)".
 
 ## Next challenge
-- Convert software in a javascrit online version, using [Rabbit Ear](https://github.com/robbykraft/Origami/) library.
+- Convert software in a javascript online version.
 
 ## For developers
 
